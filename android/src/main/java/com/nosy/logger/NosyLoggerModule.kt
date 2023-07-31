@@ -9,7 +9,7 @@ class NosyLoggerModule(reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
 
   private val logger: Logger by lazy {
-    Logger("[::1]:8080") // TODO move to config
+    Logger("127.0.0.1:8080") // TODO move to config
   }
 
   override fun getName(): String {

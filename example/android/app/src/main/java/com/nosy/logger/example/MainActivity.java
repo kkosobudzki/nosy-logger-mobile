@@ -1,4 +1,4 @@
-package com.nosyloggerexample;
+package com.nosy.logger.example;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

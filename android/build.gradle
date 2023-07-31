@@ -53,7 +53,7 @@ def supportsNamespace() {
 
 android {
   if (supportsNamespace()) {
-    namespace "com.nosylogger"
+    namespace "com.nosy.logger"
   } else {
     sourceSets {
       main {
@@ -131,6 +131,7 @@ dependencies {
   implementation "io.grpc:grpc-okhttp:$grpc_version";
   implementation "io.grpc:grpc-protobuf-lite:$grpc_version";
   implementation "io.grpc:grpc-stub:$grpc_version";
+  implementation 'javax.annotation:javax.annotation-api:1.3.2';
 }
 
 if (isNewArchitectureEnabled()) {
