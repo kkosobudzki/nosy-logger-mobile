@@ -17,6 +17,6 @@ const NosyLogger = NativeModules.NosyLogger
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return NosyLogger.multiply(a, b);
+export function log(message: string): Promise<void> {
+  return NosyLogger.log(new Date().toISOString(), message);
 }

@@ -12,11 +12,11 @@ class NosyLoggerModule(reactContext: ReactApplicationContext) :
     return NAME
   }
 
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
   @ReactMethod
-  fun multiply(a: Double, b: Double, promise: Promise) {
-    promise.resolve(a * b)
+  fun log(message: String, promise: Promise) {
+    // TODO log message with grpc here
+
+    promise.resolve();
   }
 
   companion object {
