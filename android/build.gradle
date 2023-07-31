@@ -2,8 +2,6 @@ buildscript {
   // Buildscript is evaluated before everything else so we can't use getExtOrDefault
   def kotlin_version = rootProject.ext.has("kotlinVersion") ? rootProject.ext.get("kotlinVersion") : project.properties["NosyLogger_kotlinVersion"]
 
-  def grpc_version = rootProject.ext.has("grpcVersion") ? rootProject.ext.get("grpcVersion") : project.properties["NosyLogger_grpcVersion"]
-
   repositories {
     google()
     mavenCentral()
@@ -96,6 +94,8 @@ android {
 
 }
 
+def grpc_version = getExtOrDefault("grpcVersion")
+
 protobuf {
   protoc { artifact = 'com.google.protobuf:protoc:3.23.4' }
 
@@ -141,4 +141,5 @@ if (isNewArchitectureEnabled()) {
     jsRootDir = file("../src/")
     libraryName = "NosyLogger"
     codegenJavaPackageName = "com.nosy.logger"
+  }
 }
