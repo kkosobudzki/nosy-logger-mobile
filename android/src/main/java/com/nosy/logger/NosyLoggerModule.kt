@@ -8,15 +8,19 @@ import com.facebook.react.bridge.Promise
 class NosyLoggerModule(reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
 
+  private val logger: Logger by lazy {
+    Logger("[::1]:8080") // TODO move to config
+  }
+
   override fun getName(): String {
     return NAME
   }
 
   @ReactMethod
-  fun log(message: String, promise: Promise) {
-    // TODO log message with grpc here
+  fun log(date: String, message: String, promise: Promise) {
+    logger.log(date, message)
 
-    promise.resolve();
+    promise.resolve(true)
   }
 
   companion object {
