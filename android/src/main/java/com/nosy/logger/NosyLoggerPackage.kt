@@ -1,4 +1,4 @@
-package com.nosylogger
+package com.nosy.logger
 
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule
