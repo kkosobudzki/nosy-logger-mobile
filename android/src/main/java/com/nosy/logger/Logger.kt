@@ -5,7 +5,7 @@ import nosy_logger.LoggerGrpc
 import nosy_logger.LoggerGrpc.LoggerBlockingStub
 import nosy_logger.LoggerOuterClass.Log
 
-internal class Logger(private val url: String) {
+internal class Logger(private val url: String, private val apiKey: String) {
 
   private val stub: LoggerBlockingStub by lazy {
     ManagedChannelBuilder.forTarget(url)

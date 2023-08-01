@@ -1,5 +1,9 @@
 import { NativeModules, Platform } from 'react-native';
 
+type Config = {
+  apiKey: string;
+};
+
 const LINKING_ERROR =
   `The package 'nosy-logger' doesn't seem to be linked. Make sure: \n\n` +
   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
@@ -16,6 +20,10 @@ const NosyLogger = NativeModules.NosyLogger
         },
       }
     );
+
+export function init(config: Config): Promise<void> {
+  return NosyLogger.init(config);
+};
 
 export function log(message: string): Promise<void> {
   return NosyLogger.log(new Date().toISOString(), message);

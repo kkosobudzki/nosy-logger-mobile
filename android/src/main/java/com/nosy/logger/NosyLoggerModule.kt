@@ -4,20 +4,31 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.Promise
+import com.facebook.react.bridge.ReadableMap
 
 class NosyLoggerModule(reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
 
-  private val logger: Logger by lazy {
-    Logger("127.0.0.1:8080") // TODO move to config
-  }
+  private lateinit var logger: Logger
 
   override fun getName(): String {
     return NAME
   }
 
   @ReactMethod
+  fun init(config: ReadableMap) {
+    logger = Logger(
+      url = "127.0.0.1:8080", // TODO url should go from env config
+      apiKey = config.getString("apiKey").orEmpty()
+    )
+  }
+
+  @ReactMethod
   fun log(date: String, message: String, promise: Promise) {
+    if (!this::logger.isInitialized) {
+      promise.reject(IllegalStateException("Not initialized - make sure to call init() before"))
+    }
+
     logger.log(date, message)
 
     promise.resolve(true)
