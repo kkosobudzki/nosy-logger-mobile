@@ -1,12 +1,19 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { log } from 'nosy-logger';
+import { init, log } from 'nosy-logger';
+
+init({ apiKey: 'some fake api key' });
 
 export default function App() {
+  const send = () =>
+    log('hello from nosy logger example!')
+      .then(() => console.log('logged'))
+      .catch(e => console.error(e));
+
   return (
     <View style={styles.container}>
-      <Text onPress={() => log('hello from nosy logger example!')}>Press to log message</Text>
+      <Text onPress={send}>Press to log message</Text>
     </View>
   );
 }

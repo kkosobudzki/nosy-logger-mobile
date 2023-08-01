@@ -25,13 +25,13 @@ class NosyLoggerModule(reactContext: ReactApplicationContext) :
 
   @ReactMethod
   fun log(date: String, message: String, promise: Promise) {
-    if (!this::logger.isInitialized) {
+    if (this::logger.isInitialized) {
+      logger.log(date, message)
+
+      promise.resolve(true)
+    } else {
       promise.reject(IllegalStateException("Not initialized - make sure to call init() before"))
     }
-
-    logger.log(date, message)
-
-    promise.resolve(true)
   }
 
   companion object {
