@@ -14,7 +14,7 @@ internal fun ReadableMap.toLog(): Log =
 internal fun ReadableArray.toLogs(): Logs =
   Logs.newBuilder()
     .apply {
-      for (i in 0..size()) {
+      for (i in 0 until size()) {
         addLogs(getMap(i).toLog())
       }
     }
