@@ -7,14 +7,14 @@ import nosy_logger.LoggerGrpc
 import nosy_logger.LoggerGrpc.LoggerBlockingStub
 import nosy_logger.LoggerOuterClass.Logs
 
-internal class Logger(private val url: String, private val apiKey: String) {
+internal class Logger(private val config: Config) {
 
   private val stub: LoggerBlockingStub by lazy {
     val headers = Metadata().apply {
-      put(API_KEY_METADATA, apiKey)
+      put(API_KEY_METADATA, config.apiKey)
     }
 
-    ManagedChannelBuilder.forTarget(url)
+    ManagedChannelBuilder.forTarget(config.url)
       .usePlaintext() // TODO use SSL
       .build()
       .let(LoggerGrpc::newBlockingStub)

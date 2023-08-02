@@ -6,6 +6,7 @@ import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
+import com.nosy.logger.Config.Companion.toConfig
 
 class NosyLoggerModule(reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
@@ -18,10 +19,7 @@ class NosyLoggerModule(reactContext: ReactApplicationContext) :
 
   @ReactMethod
   fun init(config: ReadableMap) {
-    logger = Logger(
-      url = "127.0.0.1:8080", // TODO auto initialize from env in js
-      apiKey = config.getString("apiKey").orEmpty()
-    )
+    logger = Logger(config.toConfig())
   }
 
   @ReactMethod

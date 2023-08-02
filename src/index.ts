@@ -22,7 +22,7 @@ const NosyLogger = NativeModules.NosyLogger
     );
 
 export function init(config: Config): Promise<void> {
-  return NosyLogger.init(config);
+  return NosyLogger.init({ ...config, url: '127.0.0.1:8080' }); // TODO move url to env variable
 }
 
 export function log(message: string): Promise<void> {
