@@ -5,7 +5,7 @@ import io.grpc.Metadata
 import io.grpc.stub.MetadataUtils
 import nosy_logger.LoggerGrpc
 import nosy_logger.LoggerGrpc.LoggerBlockingStub
-import nosy_logger.LoggerOuterClass.Log
+import nosy_logger.LoggerOuterClass.Logs
 
 internal class Logger(private val url: String, private val apiKey: String) {
 
@@ -17,19 +17,15 @@ internal class Logger(private val url: String, private val apiKey: String) {
     ManagedChannelBuilder.forTarget(url)
       .usePlaintext() // TODO use SSL
       .build()
-      .let(LoggerGrpc::newBlockingStub) // TODO make it non blocking
+      .let(LoggerGrpc::newBlockingStub)
       .withInterceptors(MetadataUtils.newAttachHeadersInterceptor(headers))
       .also {
         "Logger connected to blocking grpc WITHOUT SSL".log()
       }
   }
 
-  internal fun log(date: String, message: String) {
-    Log.newBuilder()
-      .setDate(date)
-      .setMessage(message)
-      .build()
-      .let(stub::log)
+  internal fun log(logs: Logs) {
+    stub.log(logs)
   }
 
   private companion object {

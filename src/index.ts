@@ -23,8 +23,15 @@ const NosyLogger = NativeModules.NosyLogger
 
 export function init(config: Config): Promise<void> {
   return NosyLogger.init(config);
-};
+}
 
 export function log(message: string): Promise<void> {
-  return NosyLogger.log(new Date().toISOString(), message);
+  // TODO batch messages here
+  const messages = [
+    { date: new Date().toISOString(), message: 'first log' },
+    { date: new Date().toISOString(), message: 'second log' },
+    { date: new Date().toISOString(), message: 'third log' },
+  ];
+
+  return NosyLogger.log(messages);
 }
