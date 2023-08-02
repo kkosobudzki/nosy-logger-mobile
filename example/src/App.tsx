@@ -7,8 +7,8 @@ init({ apiKey: 'some fake api key' });
 
 export default function App() {
   const debug = () =>
-    log('hello from nosy logger debug example!')
-    .then(() => console.log('logged debug', 'debug'))
+    log('hello from nosy logger debug example!', 'debug')
+    .then(() => console.log('logged debug'))
     .catch(e => console.error(e));
 
   const info = () =>
@@ -17,13 +17,13 @@ export default function App() {
     .catch(e => console.error(e));
 
   const warning = () =>
-    log('hello from nosy logger warining example!')
-    .then(() => console.log('logged warning', 'warn'))
+    log('hello from nosy logger warining example!', 'warn')
+    .then(() => console.log('logged warning'))
     .catch(e => console.error(e));
 
   const error = () =>
-    log('hello from nosy logger error example!')
-      .then(() => console.log('logged error', 'error'))
+    log('hello from nosy logger error example!', 'error')
+      .then(() => console.log('logged error'))
       .catch(e => console.error(e));
 
 
