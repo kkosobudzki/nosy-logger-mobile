@@ -46,7 +46,9 @@ export default function Batch<T>(
 
         queue.unshift(...items);
       })
-      .finally(() => { flushing = false; });
+      .finally(() => {
+        flushing = false;
+      });
   }
 
   function schedule() {
@@ -57,7 +59,7 @@ export default function Batch<T>(
         timeoutId = undefined;
 
         flush();
-      }, Date.now() + maxInterval);
+      }, maxInterval);
     }
   }
 
