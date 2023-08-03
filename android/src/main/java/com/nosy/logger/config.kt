@@ -6,7 +6,7 @@ data class Config(val url: String, val apiKey: String) {
   companion object {
     fun ReadableMap.toConfig(): Config =
       Config(
-        url = getString("url").orThrow("Missing url"),
+        url = BuildConfig.COLLECTOR_URL,
         apiKey = getString("apiKey").orThrow("Missing api key")
       )
   }

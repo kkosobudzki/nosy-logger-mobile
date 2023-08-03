@@ -23,7 +23,6 @@ apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 apply plugin: "com.google.protobuf"
 
-
 def appProject = rootProject.allprojects.find { it.plugins.hasPlugin('com.android.application') }
 
 if (isNewArchitectureEnabled()) {
@@ -70,8 +69,14 @@ android {
     buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
   }
   buildTypes {
+    debug {
+      buildConfigField "String", "COLLECTOR_URL", '"127.0.0.1:8080"'
+    }
+
     release {
-      minifyEnabled false
+      buildConfigField "String", "COLLECTOR_URL", '"127.0.0.1:8080"' // TODO use prod url
+
+      minifyEnabled false // TODO switch to true
     }
   }
 
