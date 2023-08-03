@@ -12,6 +12,7 @@ export default function Batch<T>(
   { maxInterval = 5_000, maxQueueLength = 20 }: Config = {}
 ) {
   let queue: T[] = [];
+  let flushing: boolean = false;
   let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
   async function push(item: T): Promise<void> {
@@ -25,6 +26,12 @@ export default function Batch<T>(
   }
 
   async function flush(): Promise<void> {
+    if (flushing) {
+      return Promise.resolve();
+    }
+
+    flushing = true;
+
     const items = queue.splice(0);
 
     if (items.length === 0) {
@@ -33,13 +40,19 @@ export default function Batch<T>(
 
     schedule();
 
-    return send(items).catch(() => {
-      queue.unshift(...items); // TODO maybe add retry logic?
-    });
+    return send(items)
+      .catch((e) => {
+        console.error(e);
+
+        queue.unshift(...items);
+      })
+      .finally(() => { flushing = false; });
   }
 
   function schedule() {
     if (timeoutId === undefined) {
+      console.log('batch: scheduling');
+
       timeoutId = setTimeout(() => {
         timeoutId = undefined;
 
