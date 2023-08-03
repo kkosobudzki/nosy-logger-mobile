@@ -24,9 +24,7 @@ const NosyLogger = NativeModules.NosyLogger
     );
 
 export function init(config: Config): Promise<void> {
-  const { COLLECTOR_URL } = process.env;
-
-  return NosyLogger.init({ ...config, url: COLLECTOR_URL });
+  return NosyLogger.init(config);
 }
 
 export function log(message: string, level: Level = 'info'): Promise<void> {
