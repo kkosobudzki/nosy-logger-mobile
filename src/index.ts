@@ -4,6 +4,8 @@ type Config = {
   apiKey: string;
 };
 
+type Level = 'debug' | 'info' | 'warn' | 'error';
+
 const LINKING_ERROR =
   `The package 'nosy-logger' doesn't seem to be linked. Make sure: \n\n` +
   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
@@ -22,16 +24,34 @@ const NosyLogger = NativeModules.NosyLogger
     );
 
 export function init(config: Config): Promise<void> {
-  return NosyLogger.init({ ...config, url: '127.0.0.1:8080' }); // TODO move url to env variable
+  const { COLLECTOR_URL } = process.env;
+
+  return NosyLogger.init({ ...config, url: COLLECTOR_URL });
 }
 
-export function log(message: string): Promise<void> {
+export function log(message: string, level: Level = 'info'): Promise<void> {
   // TODO batch messages here
   const messages = [
-    { date: new Date().toISOString(), message: 'first log' },
-    { date: new Date().toISOString(), message: 'second log' },
-    { date: new Date().toISOString(), message: 'third log' },
+    { date: new Date().toISOString(), message: `${message} one}`, level },
+    { date: new Date().toISOString(), message: `${message} second`, level },
+    { date: new Date().toISOString(), message: `${message} third`, level },
   ];
 
   return NosyLogger.log(messages);
+}
+
+export function debug(message: string): Promise<void> {
+  return log(message, 'debug');
+}
+
+export function info(message: string): Promise<void> {
+  return log(message, 'info');
+}
+
+export function warning(message: string): Promise<void> {
+  return log(message, 'warn');
+}
+
+export function error(message: string): Promise<void> {
+  return log(message, 'error');
 }
