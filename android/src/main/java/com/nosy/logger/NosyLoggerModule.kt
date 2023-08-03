@@ -18,8 +18,10 @@ class NosyLoggerModule(reactContext: ReactApplicationContext) :
   }
 
   @ReactMethod
-  fun init(config: ReadableMap) {
+  fun init(config: ReadableMap, promise: Promise) {
     logger = Logger(config.toConfig())
+
+    promise.resolve(true)
   }
 
   @ReactMethod
