@@ -13,7 +13,7 @@ export default function Batch<T>(
 ) {
   let queue: T[] = [];
   let flushing: boolean = false;
-  let timeoutId: ReturnType<typeof setTimeout> | undefined;
+  let timeoutId: ReturnType<typeof setTimeout> | undefined = undefined;
 
   async function push(item: T): Promise<void> {
     queue.push(item);
@@ -60,6 +60,8 @@ export default function Batch<T>(
 
         flush();
       }, maxInterval);
+    } else {
+      console.log('batch: already scheduled');
     }
   }
 

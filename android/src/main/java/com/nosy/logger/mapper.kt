@@ -14,6 +14,7 @@ private fun String.toLevel(): Level =
     "error" -> Level.LEVEL_ERROR
     else -> throw IllegalArgumentException("Unsupported log level")
   }
+
 internal fun ReadableMap.toLog(): Log =
   Log.newBuilder()
     .setDate(getString("date"))
@@ -21,11 +22,15 @@ internal fun ReadableMap.toLog(): Log =
     .setLevel(getString("level")?.toLevel())
     .build()
 
-internal fun ReadableArray.toLogs(): Logs =
-  Logs.newBuilder()
-    .apply {
+internal fun ReadableArray.toLogsList(): List<Log> =
+  mutableListOf<Log>()
+    .also { list ->
       for (i in 0 until size()) {
-        addLogs(getMap(i).toLog())
+        list.add(getMap(i).toLog())
       }
     }
+
+internal fun List<Log>.toLogs(): Logs =
+  Logs.newBuilder()
+    .also { builder -> forEach(builder::addLogs) }
     .build()
