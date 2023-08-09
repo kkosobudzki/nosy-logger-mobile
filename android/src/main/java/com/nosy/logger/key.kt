@@ -9,11 +9,13 @@ import java.security.spec.X509EncodedKeySpec
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 
-internal fun String.toPublicKey(): PublicKey =
+internal fun String.mapToPublicKey(): PublicKey =
   decode()
     .let(::X509EncodedKeySpec)
     .let { spec ->
-      KeyFactory.getInstance("ChaCha20").generatePublic(spec)
+      "encoded: $spec".log()
+
+      KeyFactory.getInstance("X25519", "BC").generatePublic(spec)
     }
 
 internal fun generateSecretKey(): SecretKey =
@@ -27,5 +29,5 @@ internal fun generateKeyPair(): KeyPair =
   KeyPairGenerator.getInstance("X25519", "BC")
     .generateKeyPair()
 
-internal fun PublicKey.toString(): String =
+internal fun PublicKey.mapToString(): String =
   encoded.encode()

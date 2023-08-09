@@ -32,21 +32,27 @@ internal class Logger(private val config: Config) {
     val keyPair = generateKeyPair()
 
     val localPublicKey = PublicKey.newBuilder()
-      .setKey(keyPair.public.toString())
+      .setKey(keyPair.public.mapToString())
       .build()
 
     stub.handshake(
       localPublicKey,
       DelegatedStreamObserver(
         whenNext = { remotePublicKey ->
-          encryptor = Encryptor(
-            mySecretKey = generateSecretKey(), // TODO private here
-            serverPublicKey = remotePublicKey.key.toPublicKey()
-          )
+//          encryptor = Encryptor(
+//            mySecretKey = generateSecretKey(), // TODO private here
+//            serverPublicKey = remotePublicKey.key.mapToPublicKey()
+//          )
+          "got remote public key: ${remotePublicKey.key}".log()
+          "parsed public key: ${remotePublicKey.key.mapToPublicKey()}".log()
 
           onCompleted()
         },
-        whenError = onError
+        whenError = { e ->
+          onError(e)
+
+          e?.printStackTrace()
+        }
       )
     )
   }
