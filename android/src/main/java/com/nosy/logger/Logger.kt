@@ -5,6 +5,7 @@ import io.grpc.Metadata
 import io.grpc.stub.MetadataUtils
 import nosy_logger.LoggerGrpc
 import nosy_logger.LoggerGrpc.LoggerStub
+import nosy_logger.LoggerOuterClass.Empty
 import nosy_logger.LoggerOuterClass.Log
 
 internal class Logger(private val config: Config) {
@@ -27,12 +28,24 @@ internal class Logger(private val config: Config) {
   private lateinit var encryptor: Encryptor
 
   internal fun init(onCompleted: () -> Unit, onError: (Throwable?) -> Unit) {
-    // TODO get public key from stub
-    // TODO get private key from keystore
-    // TODO initialize encryptor
+    val params = Empty.newBuilder().build();
 
-    onError(NotImplementedError("Not implemented yet"))
+    stub.handshake(
+      params,
+      DelegatedStreamObserver(
+        whenNext = { publicKey ->
+          encryptor = Encryptor(
+            mySecretKey = generateSecretKey(),
+            serverPublicKey = publicKey.key.toPublicKey()
+          )
+
+          onCompleted()
+        },
+        whenError = onError
+      )
+    )
   }
+
   internal fun log(logs: List<Log>, onCompleted: () -> Unit, onError: (Throwable?) -> Unit) {
     logs.map(::encrypt)
       .toLogs()
@@ -41,7 +54,7 @@ internal class Logger(private val config: Config) {
       }
   }
 
-  private fun encrypt(log: Log): Log  =
+  private fun encrypt(log: Log): Log =
     Log.newBuilder()
       .setDate(log.date)
       .setLevel(log.level)

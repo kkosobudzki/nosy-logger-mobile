@@ -1,7 +1,6 @@
 package com.nosy.logger
 
 import java.nio.ByteBuffer
-import java.security.PrivateKey
 import java.security.PublicKey
 import java.security.SecureRandom
 import javax.crypto.Cipher
@@ -10,14 +9,14 @@ import javax.crypto.SecretKey
 import javax.crypto.spec.IvParameterSpec
 
 internal class Encryptor(
-  private val myPrivateKey: PrivateKey,
+  private val mySecretKey: SecretKey,
   private val serverPublicKey: PublicKey
 ) {
 
   private val sharedKey: SecretKey by lazy {
-    KeyAgreement.getInstance(KEY_ALGORITHM) // TODO not sure about this key algorithm - maybe there should be elliptic curve?
+    KeyAgreement.getInstance(KEY_ALGORITHM)
       .apply {
-        init(myPrivateKey)
+        init(mySecretKey)
 
         doPhase(serverPublicKey, true)
       }
@@ -44,6 +43,6 @@ internal class Encryptor(
   private companion object {
     const val CIPHER_ALGORITHM = "ChaCha20-Poly1305"
     const val KEY_ALGORITHM = "ChaCha20"
-    const val NONCE_LENGTH = 16
+    const val NONCE_LENGTH = 12
   }
 }
