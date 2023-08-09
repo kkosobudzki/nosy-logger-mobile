@@ -24,7 +24,7 @@ internal fun generateSecretKey(): SecretKey =
     .generateKey()
 
 internal fun generateKeyPair(): KeyPair =
-  KeyPairGenerator.getInstance("X25519")
+  KeyPairGenerator.getInstance("X25519", "BC")
     .generateKeyPair()
 
 internal fun PublicKey.toString(): String =

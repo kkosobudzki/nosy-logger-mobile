@@ -1,11 +1,15 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
 import NosyLogger from 'nosy-logger';
 
-NosyLogger.init({ apiKey: 'some fake api key' });
-
 export default function App() {
+  useEffect(() => {
+    NosyLogger.init({ apiKey: 'some fake api key' })
+      .then(() => console.log('initialized!'))
+      .catch(console.error);
+  }, []);
+
   const debug = () =>
     NosyLogger.log('hello from nosy logger debug example!', 'debug')
     .then(() => console.log('logged debug'))
