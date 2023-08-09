@@ -1,6 +1,8 @@
 package com.nosy.logger
 
 import java.security.KeyFactory
+import java.security.KeyPair
+import java.security.KeyPairGenerator
 import java.security.PublicKey
 import java.security.SecureRandom
 import java.security.spec.X509EncodedKeySpec
@@ -20,3 +22,10 @@ internal fun generateSecretKey(): SecretKey =
       init(256, SecureRandom.getInstanceStrong())
     }
     .generateKey()
+
+internal fun generateKeyPair(): KeyPair =
+  KeyPairGenerator.getInstance("X25519")
+    .generateKeyPair()
+
+internal fun PublicKey.toString(): String =
+  encoded.encode()

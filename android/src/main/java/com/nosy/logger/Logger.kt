@@ -7,6 +7,7 @@ import nosy_logger.LoggerGrpc
 import nosy_logger.LoggerGrpc.LoggerStub
 import nosy_logger.LoggerOuterClass.Empty
 import nosy_logger.LoggerOuterClass.Log
+import nosy_logger.LoggerOuterClass.PublicKey
 
 internal class Logger(private val config: Config) {
 
@@ -28,15 +29,19 @@ internal class Logger(private val config: Config) {
   private lateinit var encryptor: Encryptor
 
   internal fun init(onCompleted: () -> Unit, onError: (Throwable?) -> Unit) {
-    val params = Empty.newBuilder().build();
+    val keyPair = generateKeyPair()
+
+    val localPublicKey = PublicKey.newBuilder()
+      .setKey(keyPair.public.toString())
+      .build()
 
     stub.handshake(
-      params,
+      localPublicKey,
       DelegatedStreamObserver(
-        whenNext = { publicKey ->
+        whenNext = { remotePublicKey ->
           encryptor = Encryptor(
-            mySecretKey = generateSecretKey(),
-            serverPublicKey = publicKey.key.toPublicKey()
+            mySecretKey = generateSecretKey(), // TODO private here
+            serverPublicKey = remotePublicKey.key.toPublicKey()
           )
 
           onCompleted()

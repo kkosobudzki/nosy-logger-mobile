@@ -43,6 +43,6 @@ internal class Encryptor(
   private companion object {
     const val CIPHER_ALGORITHM = "ChaCha20-Poly1305"
     const val KEY_ALGORITHM = "ChaCha20"
-    const val NONCE_LENGTH = 12
+    const val NONCE_LENGTH = 24
   }
 }
