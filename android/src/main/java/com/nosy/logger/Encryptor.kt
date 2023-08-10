@@ -1,32 +1,17 @@
 package com.nosy.logger
 
 import java.nio.ByteBuffer
-import java.security.PublicKey
 import java.security.SecureRandom
 import javax.crypto.Cipher
-import javax.crypto.KeyAgreement
 import javax.crypto.SecretKey
 import javax.crypto.spec.IvParameterSpec
 
-internal class Encryptor(
-  private val mySecretKey: SecretKey,
-  private val serverPublicKey: PublicKey
-) {
-
-  private val sharedKey: SecretKey by lazy {
-    KeyAgreement.getInstance(KEY_ALGORITHM)
-      .apply {
-        init(mySecretKey)
-
-        doPhase(serverPublicKey, true)
-      }
-      .generateSecret(KEY_ALGORITHM)
-  }
+internal class Encryptor(private val sharedSecretKey: SecretKey) {
 
   fun encrypt(input: String, nonce: ByteArray = generateNonce()): String =
     Cipher.getInstance(CIPHER_ALGORITHM)
       .apply {
-        init(Cipher.ENCRYPT_MODE, sharedKey, IvParameterSpec(nonce))
+        init(Cipher.ENCRYPT_MODE, sharedSecretKey, IvParameterSpec(nonce))
       }
       .doFinal(input.toByteArray())
       .let { encrypted ->
@@ -42,7 +27,6 @@ internal class Encryptor(
 
   private companion object {
     const val CIPHER_ALGORITHM = "ChaCha20-Poly1305"
-    const val KEY_ALGORITHM = "ChaCha20"
-    const val NONCE_LENGTH = 24
+    const val NONCE_LENGTH = 12
   }
 }

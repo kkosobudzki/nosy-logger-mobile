@@ -7,7 +7,6 @@ import nosy_logger.LoggerGrpc
 import nosy_logger.LoggerGrpc.LoggerStub
 import nosy_logger.LoggerOuterClass.Empty
 import nosy_logger.LoggerOuterClass.Log
-import nosy_logger.LoggerOuterClass.PublicKey
 
 internal class Logger(private val config: Config) {
 
@@ -29,22 +28,17 @@ internal class Logger(private val config: Config) {
   private lateinit var encryptor: Encryptor
 
   internal fun init(onCompleted: () -> Unit, onError: (Throwable?) -> Unit) {
-    val keyPair = generateKeyPair()
-
-    val localPublicKey = PublicKey.newBuilder()
-      .setKey(keyPair.public.mapToString())
-      .build()
+    val diffieHellman = DiffieHellman()
 
     stub.handshake(
-      localPublicKey,
+      Empty.newBuilder().build(),
       DelegatedStreamObserver(
         whenNext = { remotePublicKey ->
-//          encryptor = Encryptor(
-//            mySecretKey = generateSecretKey(), // TODO private here
-//            serverPublicKey = remotePublicKey.key.mapToPublicKey()
-//          )
-          "got remote public key: ${remotePublicKey.key}".log()
-          "parsed public key: ${remotePublicKey.key.mapToPublicKey()}".log()
+          encryptor = Encryptor(
+            sharedSecretKey = diffieHellman.sharedSecret(remotePublicKey.key)
+          )
+
+          // TODO use shared secret to encrypt
 
           onCompleted()
         },
