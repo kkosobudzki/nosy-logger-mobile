@@ -31,7 +31,9 @@ internal class Encryptor(private val sharedSecretKey: SecretKey) {
 
     internal fun create(remotePublicKey: String): Encryptor {
       val diffieHellman = DiffieHellman()
-      val hkdf = Hkdf(byteArrayOf()) // TODO what about salt?
+      val hkdf = Hkdf(
+        SecureRandom().generateSeed(16) // TODO what about salt? Should be same here and there
+      )
 
       return Encryptor(
         sharedSecretKey = diffieHellman.sharedSecret(remotePublicKey).let(hkdf::extract)

@@ -16,7 +16,8 @@ internal class Hkdf(
         init(SecretKeySpec(salt, algorithm))
       }
       .doFinal(sharedSecret.encoded)
-      .let { encoded ->
-        SecretKeySpec(encoded, algorithm)
-      }
+      .toSecretKey()
+
+  private fun ByteArray.toSecretKey(): SecretKey =
+    SecretKeySpec(this, algorithm)
 }
