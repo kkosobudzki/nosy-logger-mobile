@@ -28,17 +28,11 @@ internal class Logger(private val config: Config) {
   private lateinit var encryptor: Encryptor
 
   internal fun init(onCompleted: () -> Unit, onError: (Throwable?) -> Unit) {
-    val diffieHellman = DiffieHellman()
-
     stub.handshake(
       Empty.newBuilder().build(),
       DelegatedStreamObserver(
         whenNext = { remotePublicKey ->
-          encryptor = Encryptor(
-            sharedSecretKey = diffieHellman.sharedSecret(remotePublicKey.key)
-          )
-
-          // TODO use shared secret to encrypt
+          encryptor = Encryptor.create(remotePublicKey.key)
 
           onCompleted()
         },

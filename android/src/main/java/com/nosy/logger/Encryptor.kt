@@ -23,10 +23,19 @@ internal class Encryptor(private val sharedSecretKey: SecretKey) {
       .encode()
 
   private fun generateNonce(): ByteArray =
-      SecureRandom().generateSeed(NONCE_LENGTH)
+    SecureRandom().generateSeed(NONCE_LENGTH)
 
-  private companion object {
-    const val CIPHER_ALGORITHM = "ChaCha20-Poly1305"
-    const val NONCE_LENGTH = 12
+  internal companion object {
+    private const val CIPHER_ALGORITHM = "ChaCha20-Poly1305"
+    private const val NONCE_LENGTH = 12
+
+    internal fun create(remotePublicKey: String): Encryptor {
+      val diffieHellman = DiffieHellman()
+      val hkdf = Hkdf(byteArrayOf()) // TODO what about salt?
+
+      return Encryptor(
+        sharedSecretKey = diffieHellman.sharedSecret(remotePublicKey).let(hkdf::extract)
+      )
+    }
   }
 }
