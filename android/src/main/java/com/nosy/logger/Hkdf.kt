@@ -14,6 +14,7 @@ internal class Hkdf(
     Mac.getInstance(algorithm)
       .apply {
         init(SecretKeySpec(salt, algorithm))
+        // TODO should init with sharedSecret.encoded
       }
       .doFinal(sharedSecret.encoded)
       .toSecretKey()

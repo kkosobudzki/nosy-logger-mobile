@@ -19,10 +19,11 @@ internal class DiffieHellman(
       .generateKeyPair()
   }
 
-  internal fun publicKey(): String =
+  internal val publicKey: String by lazy {
     keyPair.public
       .encoded
       .encode()
+  }
 
   internal fun sharedSecret(otherPublicKey: String): SecretKey =
     KeyAgreement.getInstance(algorithm, provider)

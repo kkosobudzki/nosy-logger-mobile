@@ -7,6 +7,7 @@ import nosy_logger.LoggerGrpc
 import nosy_logger.LoggerGrpc.LoggerStub
 import nosy_logger.LoggerOuterClass.Empty
 import nosy_logger.LoggerOuterClass.Log
+import java.security.SecureRandom
 
 internal class Logger(private val config: Config) {
 
@@ -25,6 +26,8 @@ internal class Logger(private val config: Config) {
       }
   }
 
+  private val diffieHellman by lazy { DiffieHellman() }
+
   private lateinit var encryptor: Encryptor
 
   internal fun init(onCompleted: () -> Unit, onError: (Throwable?) -> Unit) {
@@ -32,7 +35,14 @@ internal class Logger(private val config: Config) {
       Empty.newBuilder().build(),
       DelegatedStreamObserver(
         whenNext = { remotePublicKey ->
-          encryptor = Encryptor.create(remotePublicKey.key)
+          // TODO do not use salt or pass it via ENV variable
+          val hkdf = Hkdf(
+            SecureRandom().generateSeed(16) // TODO what about salt? Should be same here and there - maybe return from server?
+          )
+
+          encryptor = Encryptor(
+            sharedSecretKey = diffieHellman.sharedSecret(remotePublicKey.key).let(hkdf::extract)
+          )
 
           onCompleted()
         },
@@ -57,8 +67,12 @@ internal class Logger(private val config: Config) {
     Log.newBuilder()
       .setDate(log.date)
       .setLevel(log.level)
-      .setMessage(encryptor.encrypt(log.message))
+      .setMessage(log.message.encrypt())
+      .setPublicKey(diffieHellman.publicKey)
       .build()
+
+  private fun String.encrypt(): String =
+    encryptor.encrypt(this)
 
   private companion object {
     val API_KEY_METADATA: Metadata.Key<String> =
