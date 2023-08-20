@@ -1,6 +1,5 @@
 package com.nosy.logger
 
-import android.security.keystore.KeyProperties
 import java.security.KeyFactory
 import java.security.KeyPair
 import java.security.KeyPairGenerator
@@ -14,7 +13,7 @@ import javax.crypto.SecretKey
 internal class DiffieHellman {
 
   private val keyPair: KeyPair by lazy {
-    KeyPairGenerator.getInstance(KEY_PAIR_ALGORITHM, PROVIDER)
+    KeyPairGenerator.getInstance(ALGORITHM, PROVIDER)
       .apply {
         initialize(ECGenParameterSpec(KEY_PAIR_CURVE))
       }
@@ -28,23 +27,22 @@ internal class DiffieHellman {
   }
 
   internal fun sharedSecret(otherPublicKey: String): SecretKey =
-    KeyAgreement.getInstance(KEY_AGREEMENT_ALGORITHM, PROVIDER)
+    KeyAgreement.getInstance(ALGORITHM, PROVIDER)
       .apply {
         init(keyPair.private)
 
         doPhase(otherPublicKey.toPublicKey(), true)
       }
-      .generateSecret(KEY_PAIR_ALGORITHM)
+      .generateSecret(ALGORITHM)
 
   private fun String.toPublicKey(): PublicKey =
     decode()
       .let(::X509EncodedKeySpec)
-      .let(KeyFactory.getInstance(KEY_PAIR_ALGORITHM, PROVIDER)::generatePublic)
+      .let(KeyFactory.getInstance(ALGORITHM, PROVIDER)::generatePublic)
 
   private companion object {
+    private const val ALGORITHM = "ECDH"
     private const val PROVIDER = "BC"
-    private const val KEY_PAIR_ALGORITHM = KeyProperties.KEY_ALGORITHM_EC
     private const val KEY_PAIR_CURVE = "secp256r1"
-    private const val KEY_AGREEMENT_ALGORITHM = "ECDH"
   }
 }
