@@ -6,17 +6,15 @@ import javax.crypto.SecretKey
 import javax.crypto.spec.SecretKeySpec
 
 internal class Hkdf(
-  private val salt: ByteArray,
   private val algorithm: String = KeyProperties.KEY_ALGORITHM_HMAC_SHA256
 ) {
 
   internal fun extract(sharedSecret: SecretKey): SecretKey =
     Mac.getInstance(algorithm)
       .apply {
-        init(SecretKeySpec(salt, algorithm))
-        // TODO should init with sharedSecret.encoded
+        init(sharedSecret)
       }
-      .doFinal(sharedSecret.encoded)
+      .doFinal()
       .toSecretKey()
 
   private fun ByteArray.toSecretKey(): SecretKey =
