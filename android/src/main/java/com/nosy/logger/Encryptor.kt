@@ -15,9 +15,9 @@ internal class Encryptor(private val sharedSecretKey: SecretKey) {
       }
       .doFinal(input.toByteArray())
       .let { encrypted ->
-        ByteBuffer.allocate(encrypted.size + nonce.size)
-          .put(encrypted)
+        ByteBuffer.allocate(nonce.size + encrypted.size)
           .put(nonce)
+          .put(encrypted)
           .array()
       }
       .encode()

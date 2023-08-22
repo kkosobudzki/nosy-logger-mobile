@@ -36,7 +36,8 @@ internal class Logger(private val config: Config) {
       DelegatedStreamObserver(
         whenNext = { remotePublicKey ->
           encryptor = Encryptor(
-            sharedSecretKey = diffieHellman.sharedSecret(remotePublicKey.key).let(hkdf::extract)
+            sharedSecretKey = diffieHellman.sharedSecret(remotePublicKey.key)
+              //.let(hkdf::extract)
           )
 
           onCompleted()
