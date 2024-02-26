@@ -77,7 +77,7 @@ android {
     }
 
     debug {
-      buildConfigField "String", "COLLECTOR_URL", '"127.0.0.1:8080"'
+      buildConfigField "String", "COLLECTOR_URL", '"' + properties.getProperty("collectorUrl", "") + '"'
     }
 
     release {
