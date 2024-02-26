@@ -68,14 +68,20 @@ android {
     targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
     buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
   }
+
   buildTypes {
+    Properties properties = new Properties()
+
+    if (rootProject.file("local.properties").exists()) {
+      properties.load(rootProject.file("local.properties").newDataInputStream())
+    }
+
     debug {
-//      buildConfigField "String", "COLLECTOR_URL", '"127.0.0.1:8080"'
-      buildConfigField "String", "COLLECTOR_URL", '"' + getExtOrDefault("collectorUrl") + '"'
+      buildConfigField "String", "COLLECTOR_URL", '"127.0.0.1:8080"'
     }
 
     release {
-      buildConfigField "String", "COLLECTOR_URL", '"127.0.0.1:8080"' // TODO use prod url
+      buildConfigField "String", "COLLECTOR_URL", '"' + properties.getProperty("collectorUrl", "") + '"'
 
       minifyEnabled false // TODO switch to true
     }
@@ -98,6 +104,16 @@ android {
     }
   }
 
+  packagingOptions {
+    pickFirst 'lib/arm64-v8a/libc++_shared.so'
+    pickFirst 'lib/arm64-v8a/libfbjni.so'
+    pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+    pickFirst 'lib/armeabi-v7a/libfbjni.so'
+    pickFirst 'lib/x86/libc++_shared.so'
+    pickFirst 'lib/x86/libfbjni.so'
+    pickFirst 'lib/x86_64/libc++_shared.so'
+    pickFirst 'lib/x86_64/libfbjni.so'
+  }
 }
 
 def grpc_version = getExtOrDefault("grpcVersion")
@@ -130,7 +146,7 @@ repositories {
 def kotlin_version = getExtOrDefault("kotlinVersion")
 
 dependencies {
-  implementation 'com.facebook.react:react-android:0.72.3'
+  implementation 'com.facebook.react:react-android:0.73.4'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
   // grpc
