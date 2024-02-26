@@ -23,8 +23,6 @@ apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 apply plugin: "com.google.protobuf"
 
-def appProject = rootProject.allprojects.find { it.plugins.hasPlugin('com.android.application') }
-
 if (isNewArchitectureEnabled()) {
   apply plugin: "com.facebook.react"
 }
