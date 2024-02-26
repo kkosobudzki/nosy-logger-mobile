@@ -52,7 +52,7 @@ static def supportsNamespace() {
 
 android {
   if (supportsNamespace()) {
-    namespace "com.nosy.logger"
+    namespace "dev.nosytools.logger"
   } else {
     sourceSets {
       main {
@@ -164,6 +164,6 @@ if (isNewArchitectureEnabled()) {
   react {
     jsRootDir = file("../src/")
     libraryName = "NosyLogger"
-    codegenJavaPackageName = "com.nosy.logger"
+    codegenJavaPackageName = "dev.nosytools.logger"
   }
 }

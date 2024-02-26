@@ -1,4 +1,4 @@
-package com.nosy.logger
+package dev.nosytools.logger
 
 import java.nio.ByteBuffer
 import java.security.SecureRandom

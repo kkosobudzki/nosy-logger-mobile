@@ -1,4 +1,4 @@
-package com.nosy.logger
+package dev.nosytools.logger
 
 import android.security.keystore.KeyProperties
 import javax.crypto.Mac

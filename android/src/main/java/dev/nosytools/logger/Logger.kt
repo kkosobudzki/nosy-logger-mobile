@@ -1,4 +1,4 @@
-package com.nosy.logger
+package dev.nosytools.logger
 
 import io.grpc.ManagedChannelBuilder
 import io.grpc.Metadata
