@@ -83,7 +83,7 @@ android {
     release {
       buildConfigField "String", "COLLECTOR_URL", '"' + properties.getProperty("collectorUrl", "") + '"'
 
-      minifyEnabled false // TODO switch to true
+      minifyEnabled true
     }
   }
 
