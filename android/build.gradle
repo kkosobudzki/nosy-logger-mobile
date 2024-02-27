@@ -70,20 +70,14 @@ android {
   }
 
   buildTypes {
-    Properties properties = new Properties()
-
-    if (rootProject.file("local.properties").exists()) {
-      properties.load(rootProject.file("local.properties").newDataInputStream())
-    }
-
     debug {
-      buildConfigField "String", "COLLECTOR_URL", '"' + properties.getProperty("collectorUrl", "") + '"'
+      buildConfigField "String", "COLLECTOR_URL", '"nosy-logger-collector-http-2.onrender.com"'
     }
 
     release {
-      buildConfigField "String", "COLLECTOR_URL", '"' + properties.getProperty("collectorUrl", "") + '"'
+      buildConfigField "String", "COLLECTOR_URL", '"nosy-logger-collector-http-2.onrender.com"'
 
-      minifyEnabled true
+      minifyEnabled false
     }
   }
 

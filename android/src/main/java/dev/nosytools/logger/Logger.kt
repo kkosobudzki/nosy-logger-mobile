@@ -16,17 +16,13 @@ internal class Logger(private val config: Config) {
     }
 
     ManagedChannelBuilder.forTarget(config.url)
-      .usePlaintext() // TODO use SSL
+      .useTransportSecurity()
       .build()
       .let(LoggerGrpc::newStub)
       .withInterceptors(MetadataUtils.newAttachHeadersInterceptor(headers))
-      .also {
-        "Logger connected to blocking grpc WITHOUT SSL".log()
-      }
   }
 
   private val diffieHellman by lazy { DiffieHellman() }
-  private val hkdf by lazy { Hkdf() }
 
   private lateinit var encryptor: Encryptor
 
@@ -37,16 +33,11 @@ internal class Logger(private val config: Config) {
         whenNext = { remotePublicKey ->
           encryptor = Encryptor(
             sharedSecretKey = diffieHellman.sharedSecret(remotePublicKey.key)
-              //.let(hkdf::extract)
           )
 
           onCompleted()
         },
-        whenError = { e ->
-          onError(e)
-
-          e?.printStackTrace()
-        }
+        whenError = onError
       )
     )
   }
