@@ -43,6 +43,6 @@ internal class DiffieHellman {
   private companion object {
     private const val ALGORITHM = "ECDH"
     private const val PROVIDER = "BC"
-    private const val KEY_PAIR_CURVE = "secp256r1"
+    private const val KEY_PAIR_CURVE = "prime256v1"
   }
 }

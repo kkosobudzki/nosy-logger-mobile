@@ -71,11 +71,11 @@ android {
 
   buildTypes {
     debug {
-      buildConfigField "String", "COLLECTOR_URL", '"nosy-logger-collector-http-2.onrender.com"'
+      buildConfigField "String", "COLLECTOR_URL", '"logger-collector.fly.dev"'
     }
 
     release {
-      buildConfigField "String", "COLLECTOR_URL", '"nosy-logger-collector-http-2.onrender.com"'
+      buildConfigField "String", "COLLECTOR_URL", '"logger-collector.fly.dev"'
 
       minifyEnabled false
     }

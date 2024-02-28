@@ -7,7 +7,7 @@ export default function App() {
   useEffect(() => {
     NosyLogger.init({
       apiKey:
-        'cIQZXUgpjwQ0d08C5TYg/KD6LHKoFH066093gENxz2yLpGti3C/GBaJlTC4AxGEwwYF/iLFnmRWLE1IVJenGBw==',
+        '2lRuZT3YCrauY7rFiZMLXx8bGr36wYKd1BoHKGHk8zc+OsntaIjAhd8tFjZ3qX/bHzQKqrsxiYlTdoyOP4Arrg==',
     })
       .then(() => console.log('initialized!'))
       .catch(console.error);
