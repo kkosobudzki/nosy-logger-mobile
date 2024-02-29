@@ -1,4 +1,4 @@
-package dev.nosytools.logger
+package dev.nosytools.rnlogger
 
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
