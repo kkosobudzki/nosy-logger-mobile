@@ -7,8 +7,6 @@ import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import dev.nosytools.rnlogger.Config.Companion.toConfig
-import org.bouncycastle.jce.provider.BouncyCastleProvider
-import java.security.Security
 import dev.nosytools.logger.Logger
 
 class NosyLoggerModule(reactContext: ReactApplicationContext) :
@@ -54,10 +52,5 @@ class NosyLoggerModule(reactContext: ReactApplicationContext) :
 
   companion object {
     const val NAME = "NosyLogger"
-
-    init {
-      Security.removeProvider("BC");
-      Security.addProvider(BouncyCastleProvider()) // TODO - shouldn't it be moved to android plugin?
-    }
   }
 }

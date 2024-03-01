@@ -95,10 +95,7 @@ dependencies {
   implementation 'com.facebook.react:react-android:0.73.4'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version" // TODO bump to latest
 
-  implementation "dev.nosytools:logger:1.0.4"
-
-  // bouncy castle
-  implementation "org.bouncycastle:bcprov-jdk15to18:1.71" // TODO remove
+  implementation "dev.nosytools:logger:1.0.8"
 }
 
 if (isNewArchitectureEnabled()) {
