@@ -20,10 +20,6 @@ class NosyLoggerModule(reactContext: ReactApplicationContext) :
 
   @ReactMethod
   fun init(config: ReadableMap, promise: Promise) {
-    if (this::logger.isInitialized) {
-      return promise.reject(IllegalStateException("Already initialized"))
-    }
-
     Logger(config.toConfig())
       .run {
         init(
@@ -39,15 +35,11 @@ class NosyLoggerModule(reactContext: ReactApplicationContext) :
 
   @ReactMethod
   fun log(messages: ReadableArray, promise: Promise) {
-    if (this::logger.isInitialized) {
-      logger.log(
-        messages.toLogsList(),
-        onCompleted = { promise.resolve(true) },
-        onError = promise::reject
-      )
-    } else {
-      promise.reject(IllegalStateException("Not initialized - make sure to call init() before"))
-    }
+    logger.log(
+      messages.toLogsList(),
+      onCompleted = { promise.resolve(true) },
+      onError = promise::reject
+    )
   }
 
   companion object {
