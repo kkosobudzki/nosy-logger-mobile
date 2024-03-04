@@ -9,7 +9,7 @@ npm install @nosytools/logger-mobile
 ## Usage
 
 ```js
-import * as logger from '@nosytools/logger-mobile';
+import logger from '@nosytools/logger-mobile';
 
 // (...)
 
