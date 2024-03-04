@@ -1,31 +1,22 @@
-# nosy-logger
-
-Nosy Logger
+# Nosy Logger React Native
 
 ## Installation
 
 ```sh
-npm install nosy-logger
+npm install @nosytools/logger-mobile
 ```
 
 ## Usage
 
 ```js
-import { multiply } from 'nosy-logger';
+import logger from '@nosytools/logger-mobile';
 
-// ...
+// (...)
 
-const result = await multiply(3, 7);
+logger.init('api key for your project environment');
+
+logger.info('info message');
+logger.debug('debug message');
+logger.warning('warning message');
+logger.error('error message');
 ```
-
-## Contributing
-
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
-
-## License
-
-MIT
-
----
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
