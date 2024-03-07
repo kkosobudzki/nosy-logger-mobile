@@ -61,6 +61,10 @@ android {
 
   compileSdkVersion getExtOrIntegerDefault("compileSdkVersion")
 
+  buildFeatures {
+    buildConfig true
+  }
+
   defaultConfig {
     minSdkVersion getExtOrIntegerDefault("minSdkVersion")
     targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
