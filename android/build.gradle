@@ -10,8 +10,7 @@ buildscript {
   }
 
   dependencies {
-    classpath "com.android.tools.build:gradle:8.1.4"
-    // noinspection DifferentKotlinGradleVersion
+    classpath "com.android.tools.build:gradle:8.2.2"
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
   }
 }
@@ -82,9 +81,13 @@ android {
     disable "GradleCompatible"
   }
 
+  kotlin {
+    jvmToolchain(11)
+  }
+
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_17
-    targetCompatibility JavaVersion.VERSION_17
+    sourceCompatibility JavaVersion.VERSION_11
+    targetCompatibility JavaVersion.VERSION_11
   }
 }
 
