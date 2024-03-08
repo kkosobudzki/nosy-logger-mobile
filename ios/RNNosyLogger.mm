@@ -1,6 +1,6 @@
 #import <React/RCTBridgeModule.h>
 
-@interface RCT_EXTERN_MODULE(RNNosyLogger, NSObject)
+@interface RCT_EXTERN_MODULE(NosyLogger, NSObject)
 
 RCT_EXTERN_METHOD(start:(String)apiKey)
 RCT_EXTERN_METHOD(debug:(String)message)
