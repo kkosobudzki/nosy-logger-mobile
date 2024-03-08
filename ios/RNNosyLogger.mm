@@ -1,10 +1,12 @@
 #import <React/RCTBridgeModule.h>
 
-@interface RCT_EXTERN_MODULE(NosyLogger, NSObject)
+@interface RCT_EXTERN_MODULE(RNNosyLogger, NSObject)
 
-RCT_EXTERN_METHOD(multiply:(float)a withB:(float)b
-                 withResolver:(RCTPromiseResolveBlock)resolve
-                 withRejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(start:(String)apiKey)
+RCT_EXTERN_METHOD(debug:(String)message)
+RCT_EXTERN_METHOD(info:(String)message)
+RCT_EXTERN_METHOD(warning:(String)message)
+RCT_EXTERN_METHOD(error:(String)message)
 
 + (BOOL)requiresMainQueueSetup
 {

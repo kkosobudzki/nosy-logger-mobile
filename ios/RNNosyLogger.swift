@@ -1,6 +1,6 @@
 import NosyLogger
 
-@objc
+@objc(RNNosyLogger)
 class RNNosyLogger: NSObject {
     
   private let logger = NosyLogger()
