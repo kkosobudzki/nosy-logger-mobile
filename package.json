@@ -1,7 +1,7 @@
 {
   "name": "@nosytools/logger-mobile",
-  "version": "1.0.0",
-  "description": "Nosy Logger plugin for React Native",
+  "version": "1.0.1",
+  "description": "Nosy Logger for React Native projects. Keep your logs encrypted and secure.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
