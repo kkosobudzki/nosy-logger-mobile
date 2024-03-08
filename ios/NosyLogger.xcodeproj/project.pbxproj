@@ -3,12 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E555C0D2413F4C50049A1A2 /* NosyLogger.mm in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* NosyLogger.mm */; };
-		F4FF95D7245B92E800C19C63 /*  NosyLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /*  NosyLogger.swift */; };
+		6B5EF2C42B9B8CFB00307B3A /* NosyLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 6B5EF2C32B9B8CFB00307B3A /* NosyLogger */; };
+		F4FF95D7245B92E800C19C63 /* NosyLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* NosyLogger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B5EF2C42B9B8CFB00307B3A /* NosyLogger in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +76,9 @@
 			dependencies = (
 			);
 			name = NosyLogger;
+			packageProductDependencies = (
+				6B5EF2C32B9B8CFB00307B3A /* NosyLogger */,
+			);
 			productName = RCTDataManager;
 			productReference = 134814201AA4EA6300B7C361 /* libNosyLogger.a */;
 			productType = "com.apple.product-type.library.static";
@@ -102,6 +106,9 @@
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
+			packageReferences = (
+				6B5EF2C22B9B8CFB00307B3A /* XCRemoteSwiftPackageReference "nosy-logger-ios" */,
+			);
 			productRefGroup = 58B511D21A9E6C8500147676;
 			projectDirPath = "";
 			projectRoot = "";
@@ -117,7 +124,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4FF95D7245B92E800C19C63 /* NosyLogger.swift in Sources */,
-				B3E7B58A1CC2AC0600A0062D /* NosyLogger.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +284,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6B5EF2C22B9B8CFB00307B3A /* XCRemoteSwiftPackageReference "nosy-logger-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kkosobudzki/nosy-logger-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6B5EF2C32B9B8CFB00307B3A /* NosyLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B5EF2C22B9B8CFB00307B3A /* XCRemoteSwiftPackageReference "nosy-logger-ios" */;
+			productName = NosyLogger;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 58B511D31A9E6C8500147676 /* Project object */;
 }
