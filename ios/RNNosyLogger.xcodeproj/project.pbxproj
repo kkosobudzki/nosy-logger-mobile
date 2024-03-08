@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6B5EF2C42B9B8CFB00307B3A /* NosyLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 6B5EF2C32B9B8CFB00307B3A /* NosyLogger */; };
-		F4FF95D7245B92E800C19C63 /* NosyLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* NosyLogger.swift */; };
+		F4FF95D7245B92E800C19C63 /* RNNosyLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* RNNosyLogger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,10 +24,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		134814201AA4EA6300B7C361 /* libNosyLogger.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNosyLogger.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3E7B5891CC2AC0600A0062D /* NosyLogger.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NosyLogger.mm; sourceTree = "<group>"; };
-		F4FF95D5245B92E700C19C63 /* NosyLogger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NosyLogger-Bridging-Header.h"; sourceTree = "<group>"; };
-		F4FF95D6245B92E800C19C63 /* NosyLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NosyLogger.swift; sourceTree = "<group>"; };
+		134814201AA4EA6300B7C361 /* libRNNosyLogger.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNNosyLogger.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3E7B5891CC2AC0600A0062D /* RNNosyLogger.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RNNosyLogger.mm; sourceTree = "<group>"; };
+		F4FF95D5245B92E700C19C63 /* RNNosyLogger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNNosyLogger-Bridging-Header.h"; sourceTree = "<group>"; };
+		F4FF95D6245B92E800C19C63 /* RNNosyLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNNosyLogger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +45,7 @@
 		134814211AA4EA7D00B7C361 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				134814201AA4EA6300B7C361 /* libNosyLogger.a */,
+				134814201AA4EA6300B7C361 /* libRNNosyLogger.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,9 +53,9 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				F4FF95D6245B92E800C19C63 /* NosyLogger.swift */,
-				B3E7B5891CC2AC0600A0062D /* NosyLogger.mm */,
-				F4FF95D5245B92E700C19C63 /* NosyLogger-Bridging-Header.h */,
+				F4FF95D6245B92E800C19C63 /* RNNosyLogger.swift */,
+				B3E7B5891CC2AC0600A0062D /* RNNosyLogger.mm */,
+				F4FF95D5245B92E700C19C63 /* RNNosyLogger-Bridging-Header.h */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,9 +63,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		58B511DA1A9E6C8500147676 /* NosyLogger */ = {
+		58B511DA1A9E6C8500147676 /* RNNosyLogger */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "NosyLogger" */;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNNosyLogger" */;
 			buildPhases = (
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
@@ -75,12 +75,12 @@
 			);
 			dependencies = (
 			);
-			name = NosyLogger;
+			name = RNNosyLogger;
 			packageProductDependencies = (
 				6B5EF2C32B9B8CFB00307B3A /* NosyLogger */,
 			);
 			productName = RCTDataManager;
-			productReference = 134814201AA4EA6300B7C361 /* libNosyLogger.a */;
+			productReference = 134814201AA4EA6300B7C361 /* libRNNosyLogger.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -97,7 +97,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "NosyLogger" */;
+			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNNosyLogger" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -113,7 +113,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58B511DA1A9E6C8500147676 /* NosyLogger */,
+				58B511DA1A9E6C8500147676 /* RNNosyLogger */,
 			);
 		};
 /* End PBXProject section */
@@ -123,7 +123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4FF95D7245B92E800C19C63 /* NosyLogger.swift in Sources */,
+				F4FF95D7245B92E800C19C63 /* RNNosyLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,7 +236,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = NosyLogger;
+				PRODUCT_NAME = RNNosyLogger;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "NosyLogger-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -255,7 +255,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = NosyLogger;
+				PRODUCT_NAME = RNNosyLogger;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "NosyLogger-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -265,7 +265,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "NosyLogger" */ = {
+		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNNosyLogger" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511ED1A9E6C8500147676 /* Debug */,
@@ -274,7 +274,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "NosyLogger" */ = {
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNNosyLogger" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511F01A9E6C8500147676 /* Debug */,

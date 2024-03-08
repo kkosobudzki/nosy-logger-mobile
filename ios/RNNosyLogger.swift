@@ -1,5 +1,5 @@
-@objc(NosyLogger)
-class NosyLogger: NSObject {
+@objc(RNNosyLogger)
+class RNNosyLogger: NSObject {
 
   @objc(multiply:withB:withResolver:withRejecter:)
   func multiply(a: Float, b: Float, resolve:RCTPromiseResolveBlock,reject:RCTPromiseRejectBlock) -> Void {
