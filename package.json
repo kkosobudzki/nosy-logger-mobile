@@ -1,6 +1,6 @@
 {
   "name": "@nosytools/logger-mobile",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Nosy Logger for React Native projects. Keep your logs encrypted and secure.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -32,7 +32,11 @@
     "lint": "eslint \"src/*.{js,ts,tsx}\"",
     "prepack": "bob build"
   },
-  "keywords": ["react-native", "ios", "android"],
+  "keywords": [
+    "react-native",
+    "ios",
+    "android"
+  ],
   "repository": "https://github.com/kkosobudzki/nosy-logger-mobile",
   "author": "Krzysztof Kosobudzki (https://github.com/kkosobudzki)",
   "license": "GNU v3",
@@ -78,11 +82,16 @@
     ]
   },
   "commitlint": {
-    "extends": ["@commitlint/config-conventional"]
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "eslintConfig": {
     "root": true,
-    "extends": ["@react-native-community", "prettier"],
+    "extends": [
+      "@react-native-community",
+      "prettier"
+    ],
     "rules": {
       "prettier/prettier": [
         "error",
@@ -96,7 +105,10 @@
       ]
     }
   },
-  "eslintIgnore": ["node_modules/", "lib/"],
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/"
+  ],
   "prettier": {
     "quoteProps": "consistent",
     "singleQuote": true,
