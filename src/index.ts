@@ -16,13 +16,15 @@ type NativeLogger = {
   error: NativeLogFn;
 };
 
-export default (NativeModules.NosyLogger
-  ? NativeModules.NosyLogger
-  : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    )) satisfies NativeLogger;
+const module: NativeLogger =
+  NativeModules.NosyLogger ??
+  new Proxy(
+    {},
+    {
+      get() {
+        throw new Error(LINKING_ERROR);
+      },
+    }
+  );
+
+export default module;
