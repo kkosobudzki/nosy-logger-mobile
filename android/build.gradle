@@ -101,7 +101,7 @@ dependencies {
   implementation 'com.facebook.react:react-android:0.75.2'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-  implementation "dev.nosytools:logger:1.10.0"
+  implementation "dev.nosytools:logger:2.0.3"
 }
 
 if (isNewArchitectureEnabled()) {
