@@ -74,3 +74,6 @@ lib/
 
 # yarn
 .yarn/
+
+# local builds
+*.tgz
