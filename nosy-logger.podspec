@@ -37,5 +37,16 @@ Pod::Spec.new do |s|
     s.dependency "RCTTypeSafety"
     s.dependency "ReactCommon/turbomodule/core"
    end
-  end    
+  end
+
+  # Nosy Logger iOS SPM library
+  if defined?(:spm_dependency)
+    spm_dependency(s,
+      url: 'https://github.com/kkosobudzki/nosy-logger-ios.git',
+      requirement: {kind: 'upToNextMajorVersion', minimumVersion: '2.0.0'},
+      products: ['NosyLogger']
+    )
+  else
+    raise "Please upgrade React Native to >=0.75.0 to use SPM dependencies."
+  end
 end
