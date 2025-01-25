@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6B5EF2C42B9B8CFB00307B3A /* NosyLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 6B5EF2C32B9B8CFB00307B3A /* NosyLogger */; };
 		F4FF95D7245B92E800C19C63 /* RNNosyLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* RNNosyLogger.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +34,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B5EF2C42B9B8CFB00307B3A /* NosyLogger in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,7 +75,6 @@
 			);
 			name = RNNosyLogger;
 			packageProductDependencies = (
-				6B5EF2C32B9B8CFB00307B3A /* NosyLogger */,
 			);
 			productName = RCTDataManager;
 			productReference = 134814201AA4EA6300B7C361 /* libRNNosyLogger.a */;
@@ -108,7 +105,6 @@
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
 			packageReferences = (
-				6B5EF2C22B9B8CFB00307B3A /* XCRemoteSwiftPackageReference "nosy-logger-ios" */,
 			);
 			productRefGroup = 58B511D21A9E6C8500147676;
 			projectDirPath = "";
@@ -300,25 +296,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		6B5EF2C22B9B8CFB00307B3A /* XCRemoteSwiftPackageReference "nosy-logger-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kkosobudzki/nosy-logger-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		6B5EF2C32B9B8CFB00307B3A /* NosyLogger */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6B5EF2C22B9B8CFB00307B3A /* XCRemoteSwiftPackageReference "nosy-logger-ios" */;
-			productName = NosyLogger;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 58B511D31A9E6C8500147676 /* Project object */;
 }
